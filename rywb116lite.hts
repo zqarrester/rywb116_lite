@@ -1,0 +1,45 @@
+<HtermSequenceFile>
+    <ItemList>
+        <SequenceItem name="Baudrate Detection - Start">
+            <description></description>
+            <sequence value="h[1C]" />
+        </SequenceItem>
+        <SequenceItem name="Baudrate Detection - End">
+            <description></description>
+            <sequence value="h[55]" />
+        </SequenceItem>
+        <SequenceItem name="Firmware - Select Default Firmware (1)">
+            <description>Load default firmware</description>
+            <sequence value="h[31]" />
+        </SequenceItem>
+        <SequenceItem name="Init - Operation Mode">
+            <description>This command sets the operating mode of the module.</description>
+            <sequence value="a[at+rsi_opermode=6,1,48,0] h[0D] h[0A]" />
+        </SequenceItem>
+        <SequenceItem name="Init - Band">
+            <description>This command sets the operating band of the module.</description>
+            <sequence value="a[at+rsi_band=0] h[0D] h[0A]" />
+        </SequenceItem>
+        <SequenceItem name="Init - Initialization">
+            <description>This command initializes the module.</description>
+            <sequence value="a[at+rsi_init] h[0D] h[0A]" />
+        </SequenceItem>
+        <SequenceItem name="Config - IP Configuration">
+            <description>This command can be used optionally in this flow to configure the IP (192.168.50.1 in this example) of the AP. If this command is not issued, a default IP of 192.168.100.76 will be used.</description>
+            <sequence value="a[at+rsi_ipconf=0,192.168.50.1,255.255.255.0,192.168.50.1] h[0D] h[0A]" />
+        </SequenceItem>
+        <SequenceItem name="Config - AP Configuration">
+            <description>This command will configure the SSID of the AP to “REYAX” and password will be set to “12345678”.</description>
+            <sequence value="a[at+rsi_apconf=1,REYAX,2,2,12345678,300,2,4] h[0D] h[0A]" />
+        </SequenceItem>
+        <SequenceItem name="Start AP">
+            <description>This command will create the Access Point with SSID reyax where xy is a pair of alphanumeric character.
+A client device (Named "Device A" in this example) can now associate to the AP, open sockets and transfer data.</description>
+            <sequence value="a[at+rsi_join=REYAX,0,2] h[0D] h[0A]" />
+        </SequenceItem>
+        <SequenceItem name="Start Server">
+            <description>Opens a server TCP socket inside the module with port number 5001 with tos (type ofservice) type 0 and max clients support count as 5. A client socket at the remote node (Device A) can connect to the server socket</description>
+            <sequence value="a[at+rsi_ltcp=5001,5,0] h[0D] h[0A]" />
+        </SequenceItem>
+    </ItemList>
+</HtermSequenceFile>
